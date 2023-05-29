@@ -9,6 +9,7 @@ def gerar_df_prices_filtrado(nm_acoes, data_inicial, data_final):
 
     # get pct_change for each stock and add to new column
     df_prices_filtrado['pct_change'] = df_prices_filtrado.groupby('nm_acao')['Close'].pct_change()
+    df_prices_filtrado.fillna(0, inplace=True)
 
     acumulados = []
     for nm_acao, group in df_prices_filtrado.groupby("nm_acao"):
