@@ -3,7 +3,7 @@ import os
 from PIL import Image
 from models.carregar_pickles import users_wallets
 
-def selecionar_pagina(pages, image_filename="logo_orcas_2.jpeg"):
+def selecionar_pagina(pages, image_filename="logoorcaspreto.png"):
     col1, col2, col3, col4, col5, col6 = st.columns(6)
     col1.image(image=Image.open(os.path.join("images", image_filename)), width=100)
     col2.title("Orcas")

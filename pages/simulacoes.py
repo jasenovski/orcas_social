@@ -25,6 +25,10 @@ def simulacoes():
     data_inicial = pd.to_datetime(colunas[0].date_input(label="Data inicial", value=datetime.date(2023, 1, 1)))
     data_final = pd.to_datetime(colunas[1].date_input(label="Data final", value=datetime.date.today()))
 
+    if data_inicial > data_final:
+        st.error("Data inicial não pode ser maior que a data final")
+        return
+
     df_prices_filtrado = gerar_df_prices_filtrado(nm_acoes, data_inicial, data_final)
 
     fig = px.line(df_prices_filtrado, x='Date', y='Retorno Acumulado', color="nm_acao")
