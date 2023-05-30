@@ -31,6 +31,10 @@ def simulacoes():
 
     df_prices_filtrado = gerar_df_prices_filtrado(nm_acoes, data_inicial, data_final)
 
+    if len(df_prices_filtrado) <= 1:
+        st.error("Não houve cotação entre essas datas!!!")
+        return
+
     fig = px.line(df_prices_filtrado, x='Date', y='Retorno Acumulado', color="nm_acao")
     st.plotly_chart(fig)
 
