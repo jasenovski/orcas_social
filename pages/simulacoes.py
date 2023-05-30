@@ -19,13 +19,17 @@ def simulacoes(country="br"):
         df_prices = pd.read_pickle(os.path.join("pickles", "prices_us.pkl"))
         options = sorted(df_prices["nm_acao"].drop_duplicates().to_list())
 
+    min_date = min(df_prices["Date"])
+    max_date = max(df_prices["Date"])
+    stardard_date = datetime.date(2023, 1, 1)
+
     st.text("")
     st.subheader("Selecione as ações para a simulação")
     nm_acoes = st.multiselect(label="", options=options)
 
     colunas = st.columns(2)
-    data_inicial = pd.to_datetime(colunas[0].date_input(label="Data inicial", value=datetime.date(2023, 1, 1)))
-    data_final = pd.to_datetime(colunas[1].date_input(label="Data final", value=datetime.date.today()))
+    data_inicial = pd.to_datetime(colunas[0].date_input(label="Data inicial", min_value=min_date, max_value=max_date, value=stardard_date))
+    data_final = pd.to_datetime(colunas[1].date_input(label="Data final", min_value=data_inicial, max_value=max_date, value=max_date))
 
     if data_inicial >= data_final:
         st.error("Data inicial não pode ser maior ou igual que a data final!!!")
