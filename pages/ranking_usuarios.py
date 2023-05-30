@@ -3,7 +3,7 @@ import pandas as pd
 from models.gerar_ranking import gerar_ranking_usuarios
 from models.gerar_df_carteira import gerar_df_carteira_usuario
 from models.gerar_acumulados import gerar_acumulados_usuarios
-from models.carregar_pickles import users_pushes, orcas_pushes, data_dominios, df_prices, ranking_users, df_tickers_br, users_wallets
+from models.carregar_pickles import users_pushes, orcas_pushes, data_dominios, ranking_users, df_tickers_br, users_wallets
 
 def ranking_usuarios(nm_users):
 
@@ -34,8 +34,9 @@ def ranking_usuarios(nm_users):
         index=0
     )
 
+    df_prices = pd.read_pickle("pickles/prices_br.pkl")
     df_mostrar = gerar_df_carteira_usuario(nm_user, users_pushes, orcas_pushes, data_dominios, df_prices, df_tickers_br)
-    st.dataframe(df_mostrar[["Ação", "Nome", "Data Compra", "Preco Compra", "Preco Atual", "Var %"]])
+    st.dataframe(df_mostrar[["Ação", "Nome", "Data Compra", "Preco Compra", "Preco Atual", "Total %", "Hoje %"]])
 
     last_variation_user = acumulados_usuarios[acumulados_usuarios["Usuário"] == nm_user]["retorno_carteira"].iloc[-1]
     last_date_user = pd.to_datetime(acumulados_usuarios[acumulados_usuarios["Usuário"] == nm_user]["Data"].iloc[-1]).strftime("%d/%m/%Y")

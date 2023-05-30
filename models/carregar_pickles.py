@@ -10,8 +10,6 @@ orcas_pushes = pd.read_pickle(os.path.join("pickles", "orcas_pushes.pkl"))[["id_
 
 data_dominios = pd.read_pickle(os.path.join("pickles", "data_dominios_acoes.pkl"))
 
-df_prices = pd.read_pickle(os.path.join("pickles", "df_prices.pkl"))
-
 ranking_users = pd.read_pickle(os.path.join("pickles", "ranking_usuarios.pkl"))
 
 df_tickers_br = pd.read_pickle(os.path.join("pickles", "df_tickers_br.pkl"))

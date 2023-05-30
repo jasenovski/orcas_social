@@ -20,6 +20,15 @@ def selecionar_pagina(pages, image_filename="logoorcaspreto.png"):
 
     nm_users = None
     if pagina in ["Desempenhos", "Ranking de usuários"]:
-        nm_users = st.sidebar.multiselect(label="Selecione os usuários", options=users)
+        selection = st.sidebar.multiselect(label="Selecione os usuários", options=users)
     
-    return pagina, nm_users
+    if pagina in ["Simulações"]:
+        selection = st.sidebar.selectbox(
+            label="Selecione o país",
+            options=["Brasil", "Estados Unidos"],
+            index=0
+        )
+
+        selection = "br" if selection == "Brasil" else "us"
+    
+    return pagina, selection

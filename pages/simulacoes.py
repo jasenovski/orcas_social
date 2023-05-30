@@ -2,24 +2,26 @@ import streamlit as st
 import pandas as pd
 import datetime
 import plotly.express as px
+import os
 
-from models.carregar_pickles import df_prices
 from models.gerar_grafico_acao import gerar_df_prices_filtrado
 
-def simulacoes():
+def simulacoes(country="br"):
     st.subheader("Selecione a quantia de investimento para simulação")
     valor_investimento = st.slider(label="", min_value=1000, max_value=100000, value=10000, step=500)
 
     st.text("")
 
-    options = sorted(df_prices["nm_acao"].drop_duplicates().to_list())
-    options.remove("bova11")
+    if country == "br":
+        df_prices = pd.read_pickle(os.path.join("pickles", "prices_br.pkl"))
+        options = sorted(df_prices["nm_acao"].drop_duplicates().to_list())
+    elif country == "us":
+        df_prices = pd.read_pickle(os.path.join("pickles", "prices_us.pkl"))
+        options = sorted(df_prices["nm_acao"].drop_duplicates().to_list())
+
     st.text("")
     st.subheader("Selecione as ações para a simulação")
-    nm_acoes = st.multiselect(label="",
-                        options=options)
-    
-    nm_acoes.append("bova11")
+    nm_acoes = st.multiselect(label="", options=options)
 
     colunas = st.columns(2)
     data_inicial = pd.to_datetime(colunas[0].date_input(label="Data inicial", value=datetime.date(2023, 1, 1)))
@@ -29,7 +31,7 @@ def simulacoes():
         st.error("Data inicial não pode ser maior ou igual que a data final!!!")
         return
 
-    df_prices_filtrado = gerar_df_prices_filtrado(nm_acoes, data_inicial, data_final)
+    df_prices_filtrado = gerar_df_prices_filtrado(country, df_prices, nm_acoes, data_inicial, data_final)
 
     if len(df_prices_filtrado) <= 1:
         st.error("Não houve cotação entre essas datas!!!")

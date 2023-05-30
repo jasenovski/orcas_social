@@ -10,15 +10,15 @@ pages = {"Desempenhos": desempenhos,
          "Simulações": simulacoes}
 
 def main():
-    pagina, nm_users = selecionar_pagina(pages)
+    pagina, selection = selecionar_pagina(pages)
     remove_footer_hamburger()
 
     if pagina == "Desempenhos":
-        pages[pagina](nm_users)
+        pages[pagina](nm_users=selection)
     elif pagina == "Ranking de usuários":
-        pages[pagina](nm_users)
+        pages[pagina](nm_users=selection)
     elif pagina == "Simulações":
-        pages[pagina]()
+        pages[pagina](country=selection)
 
 if __name__ == "__main__":
     main()

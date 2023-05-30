@@ -18,14 +18,18 @@ def gerar_df_carteira_usuario(nm_user, users_pushes, orcas_pushes, data_dominios
 
     precos_atuais = []
     variacoes_hoje = []
+    variacoes_total = []
     for i, linha in df_mostrar.iterrows():
         nm_acao = linha["nm_acao"]
         preco_atual = df_prices[df_prices["nm_acao"] == nm_acao]["Close"].iloc[-1]
+        preco_entrada = float(linha["preco_entrada"])
         variacao_hoje = df_prices[df_prices["nm_acao"] == nm_acao]["pct_change"].iloc[-1]
         precos_atuais.append(f"{preco_atual:.2f}")
         variacoes_hoje.append(f"{100 * variacao_hoje:.2f}%")
+        variacoes_total.append(f"{100 * (preco_atual / preco_entrada - 1):.2f}%")
 
     df_mostrar["Preco Atual"] = precos_atuais
-    df_mostrar["Var %"] = variacoes_hoje
+    df_mostrar["Total %"] = variacoes_total
+    df_mostrar["Hoje %"] = variacoes_hoje
 
     return df_mostrar.rename(columns={"dt_entrada": "Data Compra", "nm_acao": "Ação", "Name": "Nome", "preco_entrada": "Preco Compra"})
