@@ -44,8 +44,11 @@ def simulacoes(country="br"):
         retorno_acumulado = df_prices_filtrado[df_prices_filtrado["nm_acao"] == nm_acao]["Retorno Acumulado"].iloc[-1]
         retorno_final = retorno_acumulado - 1
 
-        data_compra = df_prices_filtrado[df_prices_filtrado["nm_acao"] == nm_acao]["Date"].iloc[0]
-        data_venda = df_prices_filtrado[df_prices_filtrado["nm_acao"] == nm_acao]["Date"].iloc[-1]
+        # data_compra = df_prices_filtrado[df_prices_filtrado["nm_acao"] == nm_acao]["Date"].iloc[0]
+        # data_venda = df_prices_filtrado[df_prices_filtrado["nm_acao"] == nm_acao]["Date"].iloc[-1]
+
+        data_compra = data_inicial
+        data_venda = data_final
 
         duracao = (data_venda - data_compra).days
         retorno_anual = ((retorno_acumulado) ** (1 / (duracao / 365))) - 1
