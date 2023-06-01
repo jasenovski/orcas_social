@@ -30,6 +30,6 @@ def gerar_df_carteira_usuario(nm_user, users_pushes, orcas_pushes, data_dominios
 
     df_mostrar["Preco Atual"] = precos_atuais
     df_mostrar["Total %"] = variacoes_total
-    df_mostrar["Hoje %"] = variacoes_hoje
+    df_mostrar["Ult. %"] = variacoes_hoje
 
     return df_mostrar.rename(columns={"dt_entrada": "Data Compra", "nm_acao": "Ação", "Name": "Nome", "preco_entrada": "Preco Compra"})
