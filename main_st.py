@@ -1,7 +1,7 @@
-from pages.main_page import selecionar_pagina
-from pages.desempenhos import desempenhos
-from pages.ranking_usuarios import ranking_usuarios
-from pages.simulacoes import simulacoes
+from pgs.main_page import selecionar_pagina
+from pgs.desempenhos import desempenhos
+from pgs.ranking_usuarios import ranking_usuarios
+from pgs.simulacoes import simulacoes
 
 from models.remove_footer_hamburger import remove_footer_hamburger
 
