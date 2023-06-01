@@ -40,7 +40,8 @@ def ranking_usuarios(nm_users):
 
     last_variation_user = acumulados_usuarios[acumulados_usuarios["Usuário"] == nm_user]["retorno_carteira"].iloc[-1]
     last_date_user = pd.to_datetime(acumulados_usuarios[acumulados_usuarios["Usuário"] == nm_user]["Data"].iloc[-1]).strftime("%d/%m/%Y")
-    first_date_user = pd.to_datetime(acumulados_usuarios[acumulados_usuarios["Usuário"] == nm_user]["Data"].iloc[1]).strftime("%d/%m/%Y")
+    first_date_user = users_wallets[users_wallets["nm_user"] == nm_user]["dt_referencia"].iloc[1].strftime("%d/%m/%Y")
+    # first_date_user = pd.to_datetime(acumulados_usuarios[acumulados_usuarios["Usuário"] == nm_user]["Data"].iloc[1]).strftime("%d/%m/%Y")
 
     qtd_pushes_orcas = len(orcas_pushes[orcas_pushes["data_venda"].isnull()])
     st.info(f"O usuário {nm_user} possui uma carteira com {len(df_mostrar)}/{qtd_pushes_orcas} ({100 * len(df_mostrar)/qtd_pushes_orcas:.2f}%) pushes Orcas, com data de início em {first_date_user} até {last_date_user}.")
