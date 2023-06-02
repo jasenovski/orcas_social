@@ -37,4 +37,7 @@ def selecionar_pagina(pages, image_filename="logoorcaspreto.png"):
 
         selection = "br" if selection == "Brasil" else "us"
     
+    with st.sidebar.expander("Contato:", expanded=True):
+        st.write(f"igor.jasenovski@orcas.deals")
+    
     return pagina, selection
