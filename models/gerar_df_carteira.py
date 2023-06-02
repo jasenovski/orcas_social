@@ -10,6 +10,7 @@ def gerar_df_carteira_usuario(nm_user, users_pushes, orcas_pushes, data_dominios
         # df_mostrar["preco_compra"] = df_mostrar["preco_compra"].map(lambda preco: f"{preco:.2f}")
         df_mostrar = df_mostrar.rename(columns={"data_compra": "dt_entrada", "preco_compra": "preco_entrada"})
     
+    df_mostrar.sort_values(by="dt_entrada", inplace=True)
     df_mostrar["dt_entrada"] = df_mostrar["dt_entrada"].map(lambda data: pd.to_datetime(data).strftime("%d/%m/%Y"))    
     df_mostrar["preco_entrada"] = df_mostrar["preco_entrada"].map(lambda preco: f"{float(preco):.2f}")
 
