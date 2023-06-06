@@ -2,8 +2,8 @@ import pandas as pd
 
 def gerar_acumulados_usuarios(users_wallets, nm_users):
 
-    nm_users.append("Bova")
     nm_users.append("Orcas")
+    nm_users.append("Bova")    
 
     df = users_wallets[users_wallets["nm_user"].isin(nm_users)]
 
