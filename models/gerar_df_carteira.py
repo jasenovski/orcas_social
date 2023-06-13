@@ -8,6 +8,7 @@ def gerar_df_carteira_usuario(nm_user, users_pushes, orcas_pushes, data_dominios
     else:
         df_mostrar = pd.merge(orcas_pushes, data_dominios, left_on='id_acao', right_on='id', how='left')# [["nm_acao", "data_compra", "preco_compra"]]
         # df_mostrar["preco_compra"] = df_mostrar["preco_compra"].map(lambda preco: f"{preco:.2f}")
+        df_mostrar = df_mostrar[df_mostrar["data_venda"].isnull()]
         df_mostrar = df_mostrar.rename(columns={"data_compra": "dt_entrada", "preco_compra": "preco_entrada"})
     
     df_mostrar.sort_values(by="dt_entrada", inplace=True)
